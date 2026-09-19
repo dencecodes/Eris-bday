@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e8b4bc">
+<meta name="description" content="A love letter, just for her.">
+<title>A Love Letter ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: var(--blush);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body.is-reading { overflow: hidden; }
+button { font: inherit; color: inherit; }
+
+:root {
+  --blush: #f6d9d9;
+  --blush-light: #fbeaea;
+  --soft-rose: #e8b4bc;
+  --rose-deep: #d9909e;
+  --dusty-pink: #c98a93;
+  --peach: #f3d9c4;
+  --cream: #fdf8f2;
+  --cream-deep: #f7eee2;
+  --burgundy: #6b2c39;
+  --burgundy-soft: #8c4655;
+  --champagne: #e8d9bc;
+  --gold: #c6a15b;
+  --gold-light: #e3cd9a;
+  --paper: #fffaf2;
+  --ink: #4a2e33;
+  --pop-pink: #e23e77;
+}
+
+.sprite-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ===================== STAGE ===================== */
+.stage {
+  --w: min(86vw, 440px, 66vh);   /* envelope width  */
+  --h: calc(var(--w) * .66);     /* envelope height */
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--h) * .55) 6vw 6vh;
+  overflow: hidden;
+}
+
+/* pink backdrop lives on its own fixed layer so petals and roses can sit above it */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 28% 78%, rgba(255,255,255,0.4), transparent 60%),
+    radial-gradient(ellipse 55% 45% at 78% 18%, rgba(255,255,255,0.32), transparent 60%),
+    linear-gradient(165deg, var(--blush-light) 0%, var(--blush) 55%, var(--soft-rose) 100%);
+}
+
+/* ===================== AMBIENT DECOR ===================== */
+.ambient { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.petal { position: absolute; top: -10%; animation: fall linear infinite; }
+.petal svg { width: 100%; height: auto; display: block; }
+@keyframes fall {
+  0%   { transform: translate(0, -10vh) rotate(0deg); }
+  50%  { transform: translate(3vw, 55vh) rotate(190deg); }
+  100% { transform: translate(-3vw, 120vh) rotate(360deg); }
+}
+.particle {
+  position: absolute; bottom: -5%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.95), var(--gold-light) 45%, transparent 72%);
+  animation: drift-up linear infinite;
+}
+@keyframes drift-up {
+  0%   { transform: translate(0,0); opacity: 0; }
+  12%  { opacity: .85; }
+  88%  { opacity: .5; }
+  100% { transform: translate(2vw, -105vh); opacity: 0; }
+}
+.rise-heart { position: absolute; bottom: -6%; color: var(--pop-pink); line-height: 1; opacity: 0; animation: rise-heart linear infinite; }
+@keyframes rise-heart {
+  0%   { transform: translate(0,0) scale(.6); opacity: 0; }
+  10%  { opacity: .55; }
+  50%  { transform: translate(2vw,-55vh) scale(1); }
+  100% { transform: translate(-2vw,-115vh) scale(.8); opacity: 0; }
+}
+
+.deco { position: fixed; z-index: 1; pointer-events: none; }
+.deco svg { width: 100%; height: auto; display: block; }
+.deco--spin svg { animation: spin-slow 44s linear infinite; }
+.deco--twinkle { animation: twinkle 2.6s ease-in-out infinite; }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes twinkle { 0%, 100% { opacity: .35; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.1); } }
+.pearls { position: fixed; z-index: 1; width: clamp(140px, 30vw, 220px); color: var(--champagne); opacity: .85; pointer-events: none; }
+.pearls svg { width: 100%; height: auto; display: block; }
+
+/* ===================== ENVELOPE ===================== */
+.env-wrap {
+  position: relative;
+  width: var(--w);
+  height: var(--h);
+  animation: env-enter 1.2s cubic-bezier(.22,.8,.3,1) backwards;
+  transition: transform 1.1s cubic-bezier(.5,0,.2,1), opacity .9s ease;
+}
+@keyframes env-enter {
+  from { transform: translateY(70px) rotate(-3deg); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+/* soft light pulsing behind the envelope */
+.env-glow {
+  position: absolute; left: 50%; top: 50%;
+  width: 150%; aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,255,255,.8), transparent 62%);
+  animation: glow-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes glow-pulse { 0%, 100% { opacity: .45; } 50% { opacity: .95; } }
+
+.env-shadow { position: relative; width: 100%; height: 100%; filter: drop-shadow(0 22px 22px rgba(107,44,57,.28)); }
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1100px;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.envelope:focus-visible { outline: 3px solid rgba(255,255,255,.95); outline-offset: 10px; border-radius: 6px; }
+
+.env-back, .env-front { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.env-back  { z-index: 1; }
+.env-front { z-index: 3; pointer-events: none; }
+
+/* the small letter tucked inside */
+.env-letter {
+  position: absolute;
+  z-index: 2;
+  left: 6%; top: 6%;
+  width: 88%; height: 92%;
+  background: var(--paper);
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(107,44,57,.22), inset 0 0 0 1px rgba(198,161,91,.4);
+  padding: 7% 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 6%;
+  transition: transform 1s cubic-bezier(.45,0,.2,1);
+}
+.env-letter__to { font-family: 'Parisienne', cursive; color: var(--pop-pink); font-size: calc(var(--w) * .075); line-height: 1; }
+.env-letter__lines {
+  display: block;
+  flex: 1;
+  background: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--w) * .05 - 1px), rgba(198,161,91,.4) calc(var(--w) * .05 - 1px), rgba(198,161,91,.4) calc(var(--w) * .05));
+}
+
+/* the flap: hinged on its top edge, two faces (outside = light, inside = deeper rose) */
+.env-flap {
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 58%;
+  z-index: 4;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  transition: transform .9s cubic-bezier(.5,0,.2,1), z-index 0s;
+}
+.env-flap__out, .env-flap__in {
+  position: absolute; inset: 0;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.env-flap__out { background: linear-gradient(170deg, #f8d4da, #eeb3bd); }
+.env-flap__in  { background: linear-gradient(170deg, #dc93a3, #c67487); transform: rotateY(180deg); }
+.env-seal {
+  position: absolute;
+  left: 50%; top: 100%;
+  width: calc(var(--w) * .15);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) translateZ(1px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 35% 30%, #d0607c, #8c2f4a 62%, #6b2c39);
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,.25), inset 0 2px 3px rgba(255,255,255,.3), 0 3px 8px rgba(107,44,57,.4);
+}
+.env-seal svg { width: 48%; height: auto; display: block; }
+
+/* stage states (added by script) */
+.stage.is-open .env-flap { transform: rotateX(180deg); z-index: 1; transition: transform .9s cubic-bezier(.5,0,.2,1), z-index 0s .45s; }
+.stage.is-peek .env-letter { transform: translateY(calc(var(--h) * -.34)); }
+.stage.is-lifting .env-letter { transform: translateY(calc(var(--h) * -1.02)); }
+.stage.is-reading .env-wrap { transform: translateY(45vh) scale(.88); opacity: 0; }
+
+/* hint under the envelope */
+.hint {
+  position: absolute;
+  top: calc(100% + 26px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.05rem, 3.4vw, 1.35rem);
+  color: var(--burgundy-soft);
+  letter-spacing: .02em;
+  opacity: 0;
+  transition: opacity .8s ease;
+  pointer-events: none;
+}
+.hint.is-shown { opacity: 1; animation: hint-bob 2.6s ease-in-out infinite; }
+@keyframes hint-bob {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ===================== BACK LINK ===================== */
+.back-link {
+  position: fixed;
+  top: 14px; left: 14px;
+  z-index: 10;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(253,248,242,.85);
+  border: 1px solid rgba(198,161,91,.6);
+  color: var(--burgundy);
+  font-style: italic;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 6px 16px -8px rgba(107,44,57,.4);
+  transition: transform .25s ease;
+}
+.back-link:hover { transform: translateX(-2px); }
+body.is-reading .back-link { opacity: 0; pointer-events: none; }
+
+/* "keep reading" cue: appears only when the letter is longer than the screen */
+.scroll-cue {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: calc((100svh - min(88svh, 780px)) / 2 + 14px);
+  transform: translateX(-50%);
+  padding: 6px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(198,161,91,.7);
+  background: rgba(253,248,242,.96);
+  color: var(--burgundy-soft);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 8px 18px -8px rgba(107,44,57,.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .5s ease;
+}
+.scroll-cue.is-shown { opacity: 1; pointer-events: auto; animation: hint-bob 2.6s ease-in-out infinite; }
+
+/* ===================== READER (the full letter) ===================== */
+.reader {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3svh 4vw;
+  visibility: hidden;
+}
+.reader.is-on { visibility: visible; }
+.reader::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(107,44,57,.08), rgba(107,44,57,.34));
+  opacity: 0;
+  transition: opacity .9s ease;
+}
+.reader.is-on::before { opacity: 1; }
+.reader.is-leaving::before { opacity: 0; transition-duration: .5s; }
+
+.letter {
+  --lh: 2.05rem;                       /* one ruled line */
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 540px);
+  max-height: min(88svh, 780px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--soft-rose) transparent;
+  outline: none;
+  padding: var(--lh) clamp(22px, 6vw, 44px) calc(var(--lh) * 1.5);
+  border-radius: 4px;
+  font-family: 'Caveat', cursive;
+  font-weight: 500;
+  font-size: 1.45rem;
+  line-height: var(--lh);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--lh) - 1px), rgba(198,161,91,.3) calc(var(--lh) - 1px), rgba(198,161,91,.3) var(--lh));
+  background-attachment: local;
+  box-shadow:
+    inset 0 0 0 7px var(--paper),
+    inset 0 0 0 8px rgba(198,161,91,.45),
+    0 30px 60px -20px rgba(107,44,57,.5),
+    0 0 0 1px rgba(198,161,91,.35);
+}
+.reader.is-leaving .letter { opacity: 0; transform: translateY(28px) scale(.97); transition: opacity .5s ease, transform .5s ease; }
+
+.letter__greeting {
+  font-family: 'Parisienne', cursive;
+  font-weight: 400;
+  font-size: 2.3rem;
+  line-height: calc(var(--lh) * 2);
+  color: var(--pop-pink);
+}
+.letter p { margin: 0 0 var(--lh); }
+.letter .letter__closing { margin-bottom: 0; }
+.letter__sign {
+  font-family: 'Parisienne', cursive;
+  font-weight: 400;
+  font-size: 2.1rem;
+  line-height: calc(var(--lh) * 2);
+  color: var(--pop-pink);
+  margin: 0 !important;
+}
+
+/* lines of the letter write themselves in, one after another */
+.write { opacity: 0; transform: translateY(10px); transition: opacity .9s ease, transform .9s ease; }
+.reader.is-written .write { opacity: 1; transform: none; transition-delay: calc(min(var(--i), 9) * .3s); }
+
+.letter__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-top: var(--lh);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+.pill {
+  appearance: none;
+  cursor: pointer;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  background: var(--paper);
+  color: var(--burgundy);
+  font-style: italic;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+.pill:hover { background: var(--burgundy); color: var(--paper); transform: translateY(-2px); }
+.pill:focus-visible { outline: 3px solid rgba(191,111,130,.6); outline-offset: 2px; }
+.pill--solid { background: var(--pop-pink); border-color: var(--pop-pink); color: #fff; }
+.pill--solid:hover { background: var(--burgundy); border-color: var(--burgundy); }
+
+@media (max-width: 480px) {
+  .letter { --lh: 1.9rem; font-size: 1.32rem; }
+  .letter__greeting { font-size: 2.05rem; }
+  .letter__sign { font-size: 1.9rem; }
+}
+
+/* hearts that pop out when the letter slides up */
+.burst-heart {
+  position: fixed;
+  z-index: 30;
+  pointer-events: none;
+  line-height: 1;
+  font-size: var(--s, 20px);
+  transform: translate(-50%, -50%);
+  animation: heart-burst 1.7s cubic-bezier(.2,.7,.3,1) forwards;
+}
+@keyframes heart-burst {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(.3) rotate(0deg); }
+  15%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.1) rotate(var(--r)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}
+</style>
+<noscript><style>.stage{display:none}.reader{visibility:visible;position:static;min-height:100vh}.write{opacity:1;transform:none}.back-link{display:none}</style></noscript>
+</head>
+<body>
+
+<svg class="sprite-defs" aria-hidden="true">
+  <defs>
+    <symbol id="icon-rose" viewBox="0 0 100 100">
+      <g fill="currentColor">
+        <g opacity="0.5">
+          <path d="M50,50 C33,42 30,18 50,4 C70,18 67,42 50,50 Z" transform="rotate(0 50 50)"/>
+          <path d="M50,50 C33,42 30,18 50,4 C70,18 67,42 50,50 Z" transform="rotate(60 50 50)"/>
+          <path d="M50,50 C33,42 30,18 50,4 C70,18 67,42 50,50 Z" transform="rotate(120 50 50)"/>
+          <path d="M50,50 C33,42 30,18 50,4 C70,18 67,42 50,50 Z" transform="rotate(180 50 50)"/>
+          <path d="M50,50 C33,42 30,18 50,4 C70,18 67,42 50,50 Z" transform="rotate(240 50 50)"/>
+          <path d="M50,50 C33,42 30,18 50,4 C70,18 67,42 50,50 Z" transform="rotate(300 50 50)"/>
+        </g>
+        <g opacity="0.85">
+          <path d="M50,50 C40,44 38,28 50,18 C62,28 60,44 50,50 Z" transform="rotate(30 50 50)"/>
+          <path d="M50,50 C40,44 38,28 50,18 C62,28 60,44 50,50 Z" transform="rotate(90 50 50)"/>
+          <path d="M50,50 C40,44 38,28 50,18 C62,28 60,44 50,50 Z" transform="rotate(150 50 50)"/>
+          <path d="M50,50 C40,44 38,28 50,18 C62,28 60,44 50,50 Z" transform="rotate(210 50 50)"/>
+          <path d="M50,50 C40,44 38,28 50,18 C62,28 60,44 50,50 Z" transform="rotate(270 50 50)"/>
+          <path d="M50,50 C40,44 38,28 50,18 C62,28 60,44 50,50 Z" transform="rotate(330 50 50)"/>
+        </g>
+        <circle cx="50" cy="50" r="5.5"/>
+      </g>
+    </symbol>
+    <symbol id="icon-petal" viewBox="0 0 40 60">
+      <path d="M20,2 C34,14 34,42 20,58 C6,42 6,14 20,2 Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-star" viewBox="0 0 40 40">
+      <path d="M20,0 C21,14 26,19 40,20 C26,21 21,26 20,40 C19,26 14,21 0,20 C14,19 19,14 20,0 Z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-pearls" viewBox="0 0 180 20">
+      <g fill="currentColor">
+        <circle cx="10" cy="10" r="7.5"/><circle cx="30" cy="10" r="7.5"/><circle cx="50" cy="10" r="7.5"/>
+        <circle cx="70" cy="10" r="7.5"/><circle cx="90" cy="10" r="7.5"/><circle cx="110" cy="10" r="7.5"/>
+        <circle cx="130" cy="10" r="7.5"/><circle cx="150" cy="10" r="7.5"/><circle cx="170" cy="10" r="7.5"/>
+      </g>
+      <g fill="#fff" opacity="0.45">
+        <circle cx="7" cy="7" r="2"/><circle cx="27" cy="7" r="2"/><circle cx="47" cy="7" r="2"/>
+        <circle cx="67" cy="7" r="2"/><circle cx="87" cy="7" r="2"/><circle cx="107" cy="7" r="2"/>
+        <circle cx="127" cy="7" r="2"/><circle cx="147" cy="7" r="2"/><circle cx="167" cy="7" r="2"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Ambient layer (petals, gold dust, rising hearts) is filled in by the script -->
+<div class="ambient" id="ambient" aria-hidden="true"></div>
+
+<!-- Decoration -->
+<div class="pearls" style="top:12%;right:-8%;transform:rotate(96deg);" aria-hidden="true"><svg viewBox="0 0 180 20"><use href="#icon-pearls"></use></svg></div>
+<div class="pearls" style="bottom:14%;left:-8%;transform:rotate(-84deg);" aria-hidden="true"><svg viewBox="0 0 180 20"><use href="#icon-pearls"></use></svg></div>
+<div class="deco deco--spin" style="width:clamp(48px,11vw,78px);top:5%;right:7%;color:var(--burgundy-soft);" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#icon-rose"></use></svg></div>
+<div class="deco deco--spin" style="width:clamp(28px,6vw,44px);top:13%;right:22%;color:var(--gold);" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#icon-rose"></use></svg></div>
+<div class="deco deco--spin" style="width:clamp(52px,12vw,84px);bottom:5%;left:8%;color:var(--dusty-pink);" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#icon-rose"></use></svg></div>
+<div class="deco deco--twinkle" style="width:20px;top:24%;left:12%;color:var(--gold);" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#icon-star"></use></svg></div>
+<div class="deco deco--twinkle" style="width:14px;top:40%;right:9%;color:var(--pop-pink);animation-delay:-1.1s;" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#icon-star"></use></svg></div>
+<div class="deco deco--twinkle" style="width:16px;bottom:22%;right:16%;color:var(--gold);animation-delay:-1.8s;" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#icon-star"></use></svg></div>
+
+
+<!-- ===================== ENVELOPE ===================== -->
+<main class="stage" id="stage">
+  <div class="env-wrap" id="envWrap">
+    <div class="env-glow" aria-hidden="true"></div>
+    <div class="env-shadow">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open the love letter" aria-expanded="false">
+
+        <svg class="env-back" viewBox="0 0 100 66" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="gBack" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6a9b5"/><stop offset="1" stop-color="#d992a1"/></linearGradient>
+          </defs>
+          <rect width="100" height="66" fill="url(#gBack)"/>
+          <polygon points="0,0 100,0 50,38.3" fill="#6b2c39" opacity=".16"/>
+        </svg>
+
+        <!-- the letter tucked inside -->
+        <div class="env-letter" id="miniLetter" aria-hidden="true">
+          <span class="env-letter__to">For my love ♥</span>
+          <i class="env-letter__lines"></i>
+        </div>
+
+        <!-- front pocket: two sides + bottom fold -->
+        <svg class="env-front" viewBox="0 0 100 66" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="gL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#efb9c2"/><stop offset="1" stop-color="#f6cdd3"/></linearGradient>
+            <linearGradient id="gR" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#eeb4be"/><stop offset="1" stop-color="#f6cdd3"/></linearGradient>
+            <linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8d6db"/><stop offset="1" stop-color="#f0bfc8"/></linearGradient>
+          </defs>
+          <polygon points="0,0 50,38.3 0,66" fill="url(#gL)"/>
+          <polygon points="100,0 50,38.3 100,66" fill="url(#gR)"/>
+          <polygon points="0,66 50,38.3 100,66" fill="url(#gB)"/>
+          <g fill="none" stroke="#c98a93" stroke-opacity=".4" stroke-width=".35" stroke-linejoin="round">
+            <polyline points="0,0 50,38.3 100,0"/>
+            <polyline points="0,66 50,38.3 100,66"/>
+          </g>
+        </svg>
+
+        <!-- the flap, sealed with a heart -->
+        <div class="env-flap" aria-hidden="true">
+          <div class="env-flap__out"></div>
+          <div class="env-flap__in"></div>
+          <span class="env-seal"><svg viewBox="0 0 100 90"><path d="M50,85 C10,60 0,35 15,18 C28,4 48,10 50,28 C52,10 72,4 85,18 C100,35 90,60 50,85 Z" fill="#fff" opacity=".92"/></svg></span>
+        </div>
+      </div>
+    </div>
+    <p class="hint" id="hint">Tap the envelope to open it ♥</p>
+  </div>
+</main>
+
+<!-- ===================== THE LETTER ===================== -->
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="A love letter" aria-hidden="true">
+  <article class="letter" id="letter" tabindex="-1">
+
+    <!-- ✎ EDIT YOUR LETTER HERE — keep each paragraph inside its own <p class="write" style="--i:N"> and number them 1, 2, 3… -->
+    <h1 class="letter__greeting">My dearest Alena,</h1>
+
+    <p class="write" style="--i:1"><strong>I don’t know how to begin, so I’ll begin with the truth: you are the best thing that has ever happened to me.</strong></p>
+    <p class="write" style="--i:2">Happy Birthday,Eris. ❤️</p>
+    <p class="write" style="--i:3">I’m truly grateful that you came into my life, especially because I never expected it to happen. Before you, I always told myself that I didn’t want to be in a relationship or court someone while I was still a student and didn’t have a job yet. I had things I wanted to prove to myself first. I wanted to become someone I could be proud of before sharing my life with someone else.</p>
+    <p class="write" style="--i:4">And then you came into my life unexpectedly, and somehow, all those things I told myself started to change.</p>
+    <p class="write" style="--i:5">I never planned for you, but I’m so thankful that I met you.</p>
+    <p class="write" style="--i:6">To be honest, there are still so many things I want to give you. I actually had a gift in mind for you. I was planning to buy you a necklace because I wanted to give you something you could keep and remember me by. Something small, but something that would remind you of me whenever you look at it.</p>
+    <p class="write" style="--i:7">But right now, I don’t have enough money to buy it.</p>
+    <p class="write" style="--i:8">And I hope you know that it’s not because I don’t want to give you something special. I really do. I just have to be honest about where I am right now. I’m still a student, and I’m still working toward the things I want to achieve in my life.</p>
+    <p class="write" style="--i:9">Sometimes I wish I had more so I could give you everything I wanted to. I want to spend more time with you. I want to take you places. I want to be the one who pays for our food, our dates, and the little things we enjoy together. I want to be able to say, <strong>“Don’t worry, I’ve got this.”</strong></p>
+    <p class="write" style="--i:10">Maybe I can’t do all of those things right now, but I hope you can understand that my situation today doesn’t define what I want for tomorrow.</p>
+    <p class="write" style="--i:11"><strong>Because now, the things I want to achieve are no longer only about myself.</strong></p>
+    <p class="write" style="--i:12"><strong>I want to achieve them together with you.</strong></p>
+    <p class="write" style="--i:13">I want to finish my studies. I want to build my career. I want to become financially stable. I want to experience more of life, travel to places we’ve never been, try new things together, and create memories that we can look back on someday.</p>
+    <p class="write" style="--i:14">I used to think that I had to accomplish everything on my own before I could let someone into my life.</p>
+    <p class="write" style="--i:15">But now, I’m starting to realize that maybe having someone beside you while you work toward your dreams can make the journey even more meaningful.</p>
+    <p class="write" style="--i:16">I want you to be part of my journey.</p>
+    <p class="write" style="--i:17">I want to see you achieve your own dreams too, and I want to be there to support you the same way I hope you’ll support me. I don’t want us to hold each other back from becoming the people we want to be. Instead, I want us to grow together, encourage each other, and celebrate every little achievement along the way.</p>
+    <p class="write" style="--i:18">And that is also why I created this website for you.</p>
+    <p class="write" style="--i:19">I know it isn't a necklace. It isn't an expensive gift. It isn't something I bought from a store.</p>
+    <p class="write" style="--i:20"><strong>I made it myself.</strong></p>
+    <p class="write" style="--i:21">I wanted to create something that was made specifically for you, because I wanted to give you something that came from my time, my effort, and my heart.</p>
+    <p class="write" style="--i:22">Every little part of it is my way of saying, <strong>“You are important to me.”</strong></p>
+    <p class="write" style="--i:23">I wanted to put our memories, the things I want to say to you, and the little things that remind me of you in one place. Something you can come back to whenever you want.</p>
+    <p class="write" style="--i:24">Maybe one day, when we look back at this website, we'll laugh at how simple it was compared to everything we'll have accomplished by then.</p>
+    <p class="write" style="--i:25">Maybe we'll look at the things we dreamed about and realize that we actually achieved them.</p>
+    <p class="write" style="--i:26">And I hope that when that day comes, you'll remember that this was where it started.</p>
+    <p class="write" style="--i:27">With two people who were still figuring life out.</p>
+    <p class="write" style="--i:29">With me not having everything I wanted yet.</p>
+    <p class="write" style="--i:30">But with a heart that genuinely wanted to build something beautiful with you.</p>
+    <p class="write" style="--i:31">I may not have everything right now, but I promise you that I am working toward becoming the person I want to be.</p>
+    <p class="write" style="--i:32">And if you allow me, I want you beside me while I do it.</p>
+    <p class="write" style="--i:33">I want to experience the simple days with you, the difficult days, the exciting days, and eventually the days when we can finally say, <strong>“We made it.”</strong></p>
+    <p class="write" style="--i:34">I don't know exactly where life will take us. I can't promise that everything will always be easy. But I can promise that what I feel for you is real, and that I will always treasure the time, memories, and moments we share.</p>
+    <p class="write" style="--i:35">Thank you for coming into my life when I least expected it.</p>
+    <p class="write" style="--i:36">Thank you for making me feel things I never thought I would feel.</p>
+    <p class="write" style="--i:37">Thank you for becoming someone I look forward to seeing, talking to, and spending time with.</p>
+    <p class="write" style="--i:38">And most importantly, thank you for giving me another reason to dream about the future.</p>
+    <p class="write" style="--i:39">So today, on your birthday, I don't just want to wish you happiness.</p>
+    <p class="write" style="--i:40"><strong>I want to be part of that happiness.</strong></p>
+    <p class="write" style="--i:41">I want to see you smile.</p>
+    <p class="write" style="--i:42">I want to see you achieve your dreams.</p>
+    <p class="write" style="--i:43">I want to make memories with you.</p>
+    <p class="write" style="--i:44">I want to grow with you.</p>
+    <p class="write" style="--i:45">And someday, I want us to look back at this chapter of our lives and say, <strong>“We started with almost nothing, but we had each other, and we built something beautiful.”</strong></p>
+    <p class="write" style="--i:46">Until then, I'll keep working on my dreams, and I hope you'll keep working on yours.</p>
+    <p class="write" style="--i:47">And maybe, somewhere along the way, our dreams will become <strong>our dreams</strong>.</p>
+    <p class="write" style="--i:48"><strong>Happy Birthday, Bebi. ❤️</strong></p>
+    <p class="write" style="--i:49">I’m so grateful that you came into my life.</p>
+    <p class="write" style="--i:50">And out of all the unexpected things that have happened to me, meeting you is one of the things I will always be thankful for.</p>
+    <p class="write" style="--i:51"><strong>This website is just a small gift, but the meaning behind it is simple:</strong></p>
+    <p class="write" style="--i:52"><strong>I wanted to create something for the person who unexpectedly became such a beautiful part of my life.</strong></p>
+    <p class="write" style="--i:53">I love you. ❤️</p>
+    <p class="write letter__closing" style="--i:54">Forever yours,</p>
+    <p class="write letter__sign" style="--i:55">Dence</p>
+
+    <!-- ✎ end of letter -->
+
+    <div class="write letter__actions" style="--i:56">
+      <button class="pill pill--solid" id="foldBtn" type="button">Fold it back</button>
+    </div>
+  </article>
+  <button class="scroll-cue" id="scrollCue" type="button" tabindex="-1" aria-hidden="true">keep reading ↓</button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (s) { return document.querySelector(s); };
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function ms(n) { return reduced ? Math.min(n, 80) : n; }
+  function rand(a, b) { return Math.random() * (b - a) + a; }
+  function on(el, type, fn, opts) { if (el) el.addEventListener(type, fn, opts); }
+
+  var stage = $('#stage'), envWrap = $('#envWrap'), envelope = $('#envelope'), mini = $('#miniLetter');
+  var hint = $('#hint'), reader = $('#reader'), letter = $('#letter'), foldBtn = $('#foldBtn'), cue = $('#scrollCue');
+
+  // entering -> ready -> opening -> reading -> closing -> ready
+  var state = 'entering';
+  var cueDone = false;
+
+  // "keep reading" cue: only when the letter is longer than the screen, and only until she scrolls
+  function updateCue() {
+    if (letter.scrollTop > 24) cueDone = true;
+    var scrollable = letter.scrollHeight > letter.clientHeight + 24;
+    cue.classList.toggle('is-shown', state === 'reading' && scrollable && !cueDone);
+  }
+
+  /* ---------- Intro: flap opens, the letter peeks out ---------- */
+  function intro() {
+    setTimeout(function () { stage.classList.add('is-open'); }, ms(900));
+    setTimeout(function () { stage.classList.add('is-peek'); }, ms(1700));
+    setTimeout(function () {
+      if (state !== 'entering') return;
+      state = 'ready';
+      hint.classList.add('is-shown');
+    }, ms(2600));
+  }
+
+  /* ---------- Open: the letter slides out, then unfolds full size ---------- */
+  function requestOpen() {
+    if (state === 'opening' || state === 'reading' || state === 'closing') return;
+    var early = state === 'entering';           // tapped before the intro finished
+    state = 'opening';
+    hint.classList.remove('is-shown');
+    envelope.setAttribute('aria-expanded', 'true');
+    stage.classList.add('is-open', 'is-peek');
+    setTimeout(function () {
+      stage.classList.add('is-lifting');        // letter rises completely out of the envelope
+      burstHearts();
+      setTimeout(revealLetter, ms(1100));
+    }, ms(early ? 900 : 0));
+  }
+
+  // FLIP: start the big letter exactly where the small one is, then let it grow into place.
+  function revealLetter() {
+    letter.style.transition = 'none';
+    letter.style.transform = '';
+    letter.style.clipPath = '';
+    letter.scrollTop = 0;
+
+    var m = mini.getBoundingClientRect();       // small letter, out of the envelope
+    var b = letter.getBoundingClientRect();     // where the big letter will rest
+    var sx = m.width / b.width;
+    var dx = m.left - b.left;
+    var dy = m.top - b.top;
+    var crop = Math.max(0, Math.min(100, (1 - (m.height / sx) / b.height) * 100));
+
+    letter.style.transformOrigin = '0 0';
+    letter.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(' + sx + ')';
+    letter.style.clipPath = 'inset(0 0 ' + crop + '% 0)';
+
+    reader.classList.remove('is-leaving');
+    reader.classList.add('is-on');
+    reader.setAttribute('aria-hidden', 'false');
+    mini.style.visibility = 'hidden';           // the paper now "is" the big letter
+    stage.classList.add('is-reading');          // the envelope drops away
+    stage.setAttribute('inert', '');
+    document.body.classList.add('is-reading');
+
+    void letter.offsetWidth;                    // commit the starting frame
+
+    var dur = reduced ? '0.01s' : '1.15s';
+    var ease = 'cubic-bezier(.22,.8,.24,1)';
+    letter.style.transition = 'transform ' + dur + ' ' + ease + ', clip-path ' + dur + ' ' + ease;
+    letter.style.transform = 'translate(0,0) scale(1)';
+    letter.style.clipPath = 'inset(0 0 0% 0)';
+
+    setTimeout(function () { reader.classList.add('is-written'); }, ms(950));
+    setTimeout(function () {
+      // hand control back to the stylesheet (restores the paper's shadow)
+      letter.style.transition = '';
+      letter.style.transform = '';
+      letter.style.transformOrigin = '';
+      letter.style.clipPath = '';
+      state = 'reading';
+      letter.focus({ preventScroll: true });
+      cueDone = false;
+      setTimeout(updateCue, ms(2200));          // after the first lines have written in
+    }, ms(1250));
+  }
+
+  /* ---------- Close: fold the letter back into the envelope ---------- */
+  function closeLetter() {
+    if (state !== 'reading') return;
+    state = 'closing';
+    cue.classList.remove('is-shown');
+    reader.classList.remove('is-written');
+    reader.classList.add('is-leaving');
+    stage.classList.remove('is-reading');       // envelope floats back up
+    mini.style.visibility = '';
+
+    setTimeout(function () {
+      reader.classList.remove('is-on', 'is-leaving');
+      reader.setAttribute('aria-hidden', 'true');
+      stage.removeAttribute('inert');
+      document.body.classList.remove('is-reading');
+      stage.classList.remove('is-lifting');     // letter slides back into the envelope
+      envelope.setAttribute('aria-expanded', 'false');
+    }, ms(550));
+
+    setTimeout(function () {
+      state = 'ready';
+      hint.classList.add('is-shown');
+      envelope.focus({ preventScroll: true });
+    }, ms(1700));
+  }
+
+  /* ---------- Hearts that pop out as the letter rises ---------- */
+  function burstHearts() {
+    if (reduced) return;
+    var r = envelope.getBoundingClientRect();
+    var glyphs = ['♥', '♥', '♡', '✦'];
+    var colors = ['#e23e77', '#e8b4bc', '#c6a15b', '#d9909e', '#8c4655'];
+    for (var i = 0; i < 12; i++) {
+      var h = document.createElement('span');
+      h.className = 'burst-heart';
+      h.textContent = glyphs[Math.floor(rand(0, glyphs.length))];
+      h.style.left = (r.left + r.width * rand(.25, .75)) + 'px';
+      h.style.top = (r.top + r.height * .15) + 'px';
+      h.style.color = colors[Math.floor(rand(0, colors.length))];
+      h.style.setProperty('--s', rand(14, 30).toFixed(0) + 'px');
+      h.style.setProperty('--dx', rand(-110, 110).toFixed(0) + 'px');
+      h.style.setProperty('--dy', rand(-220, -80).toFixed(0) + 'px');
+      h.style.setProperty('--r', rand(-45, 45).toFixed(0) + 'deg');
+      h.addEventListener('animationend', function () { this.remove(); });
+      document.body.appendChild(h);
+    }
+  }
+
+  /* ---------- Ambient: petals, gold dust, rising hearts ---------- */
+  function initAmbient() {
+    if (reduced) return;
+    var box = $('#ambient');
+    var small = window.innerWidth < 600;
+    var petalColors = ['#e23e77', '#e8b4bc', '#d9909e', '#fffdfb', '#f3d9c4', '#c98a93'];
+    var i, el;
+    for (i = 0; i < (small ? 10 : 18); i++) {
+      el = document.createElement('div');
+      el.className = 'petal';
+      el.style.left = rand(0, 100).toFixed(1) + '%';
+      el.style.width = rand(12, 26).toFixed(0) + 'px';
+      el.style.color = petalColors[Math.floor(rand(0, petalColors.length))];
+      el.style.opacity = rand(.55, .9).toFixed(2);
+      el.style.animationDuration = rand(11, 20).toFixed(1) + 's';
+      el.style.animationDelay = '-' + rand(0, 20).toFixed(1) + 's';
+      el.innerHTML = '<svg viewBox="0 0 40 60"><use href="#icon-petal"></use></svg>';
+      box.appendChild(el);
+    }
+    for (i = 0; i < (small ? 12 : 20); i++) {
+      el = document.createElement('div');
+      var size = rand(4, 10).toFixed(1) + 'px';
+      el.className = 'particle';
+      el.style.left = rand(0, 100).toFixed(1) + '%';
+      el.style.width = el.style.height = size;
+      el.style.animationDuration = rand(9, 16).toFixed(1) + 's';
+      el.style.animationDelay = '-' + rand(0, 16).toFixed(1) + 's';
+      box.appendChild(el);
+    }
+    for (i = 0; i < (small ? 5 : 8); i++) {
+      el = document.createElement('span');
+      el.className = 'rise-heart';
+      el.textContent = '♥';
+      el.style.left = rand(3, 96).toFixed(1) + '%';
+      el.style.fontSize = rand(12, 24).toFixed(0) + 'px';
+      el.style.animationDuration = rand(10, 18).toFixed(1) + 's';
+      el.style.animationDelay = '-' + rand(0, 18).toFixed(1) + 's';
+      box.appendChild(el);
+    }
+  }
+
+  /* ---------- Wire it up ---------- */
+  // Start the intro first, so nothing below can ever stop the flap from opening.
+  try { initAmbient(); } catch (err) { if (window.console) console.error(err); }
+  intro();
+
+  // Listen on the window (capture phase) so no other script on the page can swallow the tap.
+  window.addEventListener('click', function (e) {
+    if (e.target && e.target.closest && e.target.closest('#envelope')) requestOpen();
+  }, true);
+  on(envelope, 'keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); requestOpen(); }
+  });
+  on(foldBtn, 'click', closeLetter);
+  on(letter, 'scroll', updateCue, { passive: true });
+  on(cue, 'click', function () {
+    letter.scrollBy({ top: letter.clientHeight * .7, behavior: reduced ? 'auto' : 'smooth' });
+  });
+  on(reader, 'click', function (e) { if (e.target === reader) closeLetter(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLetter(); });
+
+  // restored from the browser's back/forward cache: start from a clean envelope
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    reader.classList.remove('is-on', 'is-leaving', 'is-written');
+    cue.classList.remove('is-shown');
+    stage.classList.remove('is-reading', 'is-lifting');
+    stage.removeAttribute('inert');
+    document.body.classList.remove('is-reading');
+    mini.style.visibility = '';
+    state = 'ready';
+    hint.classList.add('is-shown');
+  });
+})();
+</script>
+<script src="music.js"></script>
+</body>
+</html>

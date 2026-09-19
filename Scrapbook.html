@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday Alena!</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* ============================================================
+   HAPPY BIRTHDAY ALENA
+   ALIVE SCRAPBOOK VERSION
+   ============================================================ */
+
+
+/* ============================================================
+   COLORS
+   ============================================================ */
+
+:root {
+    --purple: #826E8B;
+    --pink: #EB6E9B;
+    --rose: #E69CBA;
+    --blush: #F4B3C7;
+    --pale: #F5CDD0;
+    --white: #ffffff;
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+body {
+    background: var(--pale);
+    font-family: 'Nunito', sans-serif;
+}
+/* =========================
+   BACK TO HOME BUTTON
+   ========================= */
+
+.back-button {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 9999;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 18px;
+
+  border: 1px solid rgba(139, 63, 82, 0.25);
+  border-radius: 999px;
+
+  background: rgba(255, 248, 249, 0.82);
+  backdrop-filter: blur(10px);
+
+  color: #8b3f52;
+
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  text-decoration: none;
+
+  box-shadow: 0 5px 18px rgba(107, 44, 57, 0.12);
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.back-button span:first-child {
+  font-family: Arial, sans-serif;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.back-button:hover {
+  transform: translateX(-3px);
+
+  background: rgba(255, 255, 255, 0.95);
+
+  box-shadow:
+    0 8px 24px rgba(107, 44, 57, 0.18);
+}
+
+.back-button:active {
+  transform: scale(0.96);
+}
+
+/* ============================================================
+   MAIN SCRAPBOOK
+   ============================================================ */
+
+.scrapbook {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    isolation: isolate;
+
+    background: var(--pale);
+}
+
+
+/* ============================================================
+   BACKGROUND
+   ============================================================ */
+
+.background-image {
+    position: absolute;
+
+    inset: -2%;
+
+    width: 104%;
+    height: 104%;
+
+    z-index: 0;
+
+    background-image: url("images/background.png");
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    transform-origin: center;
+
+    animation:
+        backgroundReveal 1.4s ease-out both,
+        backgroundBreath 14s ease-in-out 1.4s infinite alternate;
+}
+
+
+/* ============================================================
+   SOFT PINK LIGHT OVERLAY
+   ============================================================ */
+
+.scrapbook::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255,255,255,.22),
+            transparent 38%
+        );
+
+    animation: softLight 6s ease-in-out infinite alternate;
+}
+
+
+/* ============================================================
+   PHOTO AREA
+   ============================================================ */
+
+.mobile-flow {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 3;
+}
+
+
+/* ============================================================
+   PHOTO BASE
+   ============================================================ */
+
+.photo {
+    position: absolute;
+
+    z-index: 4;
+
+    opacity: 0;
+
+    will-change: transform, opacity;
+
+    animation:
+        photoEnter .9s cubic-bezier(.18,.89,.32,1.28) forwards;
+}
+
+
+/*
+   IMPORTANT:
+
+   .photo handles the entrance animation.
+
+   .photo-float handles the continuous floating animation.
+
+   This prevents the two transforms from fighting each other.
+*/
+
+.photo-float {
+    width: 100%;
+
+    will-change: transform;
+
+    animation:
+        gentleFloat 5s ease-in-out infinite;
+}
+
+
+/* ============================================================
+   PHOTOS
+
+   The images already contain their scrapbook frames.
+   Therefore no additional border/frame is added.
+   ============================================================ */
+
+.photo img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: none;
+
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    filter: none;
+
+    object-fit: contain;
+}
+
+
+/* ============================================================
+   TOP LEFT — PHOTO 7
+   ============================================================ */
+
+.photo7 {
+    left: 3.5%;
+    top: 1%;
+
+    width: 28%;
+
+    z-index: 4;
+
+    transform:
+        translate(-60px, -30px)
+        rotate(-2deg)
+        scale(.88);
+
+    animation-delay: .65s;
+}
+
+.photo7 .photo-float {
+    animation-duration: 5.8s;
+    animation-delay: 3.0s;
+}
+
+
+/* ============================================================
+   TOP CENTER — PHOTO 5
+   ============================================================ */
+
+.photo5 {
+    left: 36%;
+    top: 1%;
+
+    width: 25%;
+
+    z-index: 4;
+
+    transform:
+        translateY(-55px)
+        rotate(-1deg)
+        scale(.88);
+
+    animation-delay: .85s;
+}
+
+.photo5 .photo-float {
+    animation-duration: 6.5s;
+    animation-delay: 3.2s;
+}
+
+
+/* ============================================================
+   TOP RIGHT — PHOTO 1
+   ============================================================ */
+
+.photo1 {
+    left: 69%;
+    top: -3%;
+
+    width: 28%;
+
+    z-index: 4;
+
+    transform:
+        translate(60px, -30px)
+        rotate(2deg)
+        scale(.88);
+
+    animation-delay: 1.05s;
+}
+
+.photo1 .photo-float {
+    animation-duration: 5.5s;
+    animation-delay: 3.4s;
+}
+
+
+/* ============================================================
+   LEFT MIDDLE — PHOTO 6
+   ============================================================ */
+
+.photo6 {
+    left: 3%;
+    top: 40%;
+
+    width: 14%;
+
+    z-index: 5;
+
+    transform:
+        translate(-60px, 25px)
+        rotate(-4deg)
+        scale(.88);
+
+    animation-delay: 1.25s;
+}
+
+.photo6 .photo-float {
+    animation-duration: 6.8s;
+    animation-delay: 3.6s;
+}
+
+
+/* ============================================================
+   RIGHT MIDDLE — PHOTO 2
+   ============================================================ */
+
+.photo2 {
+    left: 71%;
+    top: 32%;
+
+    width: 22%;
+
+    z-index: 4;
+
+    transform:
+        translate(60px, 20px)
+        rotate(2deg)
+        scale(.88);
+
+    animation-delay: 1.45s;
+}
+
+.photo2 .photo-float {
+    animation-duration: 5.9s;
+    animation-delay: 3.1s;
+}
+
+
+/* ============================================================
+   BOTTOM LEFT — PHOTO 3
+   ============================================================ */
+
+.photo3 {
+    left: 23%;
+    top: 60%;
+
+    width: 24%;
+
+    z-index: 4;
+
+    transform:
+        translate(-40px, 50px)
+        rotate(3deg)
+        scale(.88);
+
+    animation-delay: 1.65s;
+}
+
+.photo3 .photo-float {
+    animation-duration: 6.3s;
+    animation-delay: 3.7s;
+}
+
+
+/* ============================================================
+   BOTTOM RIGHT — PHOTO 4
+   ============================================================ */
+
+.photo4 {
+    left: 62%;
+    top: 65%;
+
+    width: 27%;
+
+    z-index: 4;
+
+    transform:
+        translate(50px, 50px)
+        rotate(-2deg)
+        scale(.88);
+
+    animation-delay: 1.85s;
+}
+
+.photo4 .photo-float {
+    animation-duration: 5.7s;
+    animation-delay: 3.3s;
+}
+
+
+/* ============================================================
+   CENTER BIRTHDAY TITLE
+   ============================================================ */
+
+.title-block {
+    position: absolute;
+
+    left: 31%;
+    top: 38%;
+
+    width: 38%;
+
+    z-index: 20;
+
+    text-align: center;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    transform:
+        translateY(20px)
+        scale(.72)
+        rotate(-3deg);
+
+    animation:
+        titleReveal 1.2s cubic-bezier(.17,.89,.32,1.25)
+        3s forwards;
+}
+
+
+/* ============================================================
+   TITLE FLOAT
+   ============================================================ */
+
+.title-inner {
+    animation:
+        titleFloat 5s ease-in-out 4.5s infinite;
+}
+
+
+/* ============================================================
+   TITLE TEXT
+   ============================================================ */
+
+.title-line {
+    margin: 0;
+
+    font-family: 'Caveat', cursive;
+
+    font-weight: 700;
+
+    line-height: .82;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+
+/* Happy Birthday */
+
+.title-line--1 {
+    font-size: clamp(
+        38px,
+        5vw,
+        76px
+    );
+
+    color: var(--purple);
+
+    text-shadow:
+        2px 2px 0 rgba(255,255,255,.95),
+        4px 4px 0 rgba(130,110,139,.15);
+}
+
+
+/* Alena */
+
+.title-line--2 {
+    margin-top: 5px;
+
+    font-size: clamp(
+        60px,
+        7.5vw,
+        115px
+    );
+
+    color: var(--pink);
+
+    text-shadow:
+        2px 2px 0 rgba(255,255,255,.95),
+        5px 5px 0 rgba(130,110,139,.25),
+        7px 7px 12px rgba(130,110,139,.15);
+}
+
+
+/* ============================================================
+   TITLE UNDERLINE
+   ============================================================ */
+
+.birthday-underline {
+    position: relative;
+
+    width: 70%;
+    height: 12px;
+
+    margin: 5px auto 0;
+
+    overflow: hidden;
+}
+
+.birthday-underline::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 2px;
+
+    width: 100%;
+    height: 5px;
+
+    border-radius: 50%;
+
+    border-top: 4px solid var(--pink);
+
+    transform:
+        translateX(-50%)
+        rotate(-2deg)
+        scaleX(0);
+
+    transform-origin: center;
+
+    animation:
+        underlineDraw .7s ease-out 3.65s forwards;
+}
+
+
+/* ============================================================
+   TITLE SPARKLES
+   ============================================================ */
+
+.title-block::before,
+.title-block::after {
+    content: "✦";
+
+    position: absolute;
+
+    color: var(--pink);
+
+    font-family: 'Caveat', cursive;
+
+    opacity: 0;
+
+    animation:
+        sparkleAppear .8s ease-out 3.7s forwards,
+        sparkleFloat 3s ease-in-out 4.6s infinite;
+}
+
+.title-block::before {
+    left: 5%;
+    top: 15%;
+
+    font-size: clamp(
+        20px,
+        2.2vw,
+        34px
+    );
+}
+
+.title-block::after {
+    right: 5%;
+    top: 0;
+
+    font-size: clamp(
+        18px,
+        1.8vw,
+        30px
+    );
+}
+
+
+/* ============================================================
+   FLOATING DECORATIONS
+   ============================================================ */
+
+.decoration {
+    position: absolute;
+
+    z-index: 15;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    opacity: 0;
+}
+
+
+/* ============================================================
+   HEARTS
+   ============================================================ */
+
+.heart {
+    color: var(--pink);
+
+    font-family: Arial, sans-serif;
+
+    text-shadow:
+        1px 1px 0 rgba(255,255,255,.8);
+
+    animation:
+        decorationAppear .7s ease-out forwards,
+        heartFloat 6s ease-in-out infinite;
+}
+
+
+/* left heart */
+
+.heart1 {
+    left: 28%;
+    top: 31%;
+
+    font-size: 24px;
+
+    animation-delay: 3.5s, 4.2s;
+}
+
+
+/* right heart */
+
+.heart2 {
+    left: 68%;
+    top: 31%;
+
+    font-size: 30px;
+
+    animation-delay: 3.7s, 4.5s;
+}
+
+
+/* lower left */
+
+.heart3 {
+    left: 30%;
+    top: 54%;
+
+    font-size: 18px;
+
+    animation-delay: 3.9s, 4.7s;
+}
+
+
+/* lower right */
+
+.heart4 {
+    left: 66%;
+    top: 53%;
+
+    font-size: 21px;
+
+    animation-delay: 4.1s, 4.9s;
+}
+
+
+/* ============================================================
+   BUTTERFLIES
+   ============================================================ */
+
+.butterfly {
+    color: var(--rose);
+
+    font-size: 27px;
+
+    text-shadow:
+        1px 1px 0 white;
+
+    animation:
+        decorationAppear .8s ease-out forwards,
+        butterflyFloat 7s ease-in-out infinite;
+}
+
+.butterfly1 {
+    left: 32%;
+    top: 20%;
+
+    animation-delay: 4s, 4.8s;
+}
+
+.butterfly2 {
+    left: 63%;
+    top: 24%;
+
+    font-size: 22px;
+
+    animation-delay: 4.3s, 5.1s;
+}
+
+
+/* ============================================================
+   LITTLE STARS
+   ============================================================ */
+
+.star {
+    color: var(--pink);
+
+    font-family: 'Caveat', cursive;
+
+    animation:
+        decorationAppear .6s ease-out forwards,
+        starPulse 2.5s ease-in-out infinite;
+}
+
+.star1 {
+    left: 25%;
+    top: 45%;
+
+    font-size: 20px;
+
+    animation-delay: 4s, 4.8s;
+}
+
+.star2 {
+    left: 72%;
+    top: 46%;
+
+    font-size: 25px;
+
+    animation-delay: 4.2s, 5s;
+}
+
+.star3 {
+    left: 57%;
+    top: 29%;
+
+    font-size: 16px;
+
+    animation-delay: 4.4s, 5.2s;
+}
+
+.star4 {
+    left: 41%;
+    top: 55%;
+
+    font-size: 15px;
+
+    animation-delay: 4.6s, 5.4s;
+}
+
+
+/* ============================================================
+   SMALL FLOATING DOTS
+   ============================================================ */
+
+.dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: rgba(235,110,155,.55);
+
+    box-shadow:
+        0 0 0 4px rgba(255,255,255,.25);
+
+    animation:
+        decorationAppear .6s ease-out forwards,
+        dotFloat 5s ease-in-out infinite;
+}
+
+.dot1 {
+    left: 21%;
+    top: 35%;
+
+    animation-delay: 4s, 4.5s;
+}
+
+.dot2 {
+    left: 75%;
+    top: 35%;
+
+    animation-delay: 4.2s, 4.8s;
+}
+
+.dot3 {
+    left: 27%;
+    top: 57%;
+
+    animation-delay: 4.4s, 5.1s;
+}
+
+.dot4 {
+    left: 70%;
+    top: 57%;
+
+    animation-delay: 4.6s, 5.3s;
+}
+
+
+/* ============================================================
+   PHOTO GLOW
+   Very subtle so the scrapbook still looks natural.
+   ============================================================ */
+
+.photo::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 8%;
+
+    z-index: -1;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.18);
+
+    filter: blur(18px);
+
+    opacity: 0;
+
+    animation:
+        photoGlow 4s ease-in-out 4s infinite alternate;
+}
+
+
+/* ============================================================
+   ENTRANCE ANIMATION
+   ============================================================ */
+
+@keyframes photoEnter {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(
+                var(--start-x, 0),
+                var(--start-y, 0)
+            )
+            rotate(var(--rotation, 0deg))
+            scale(.88);
+    }
+
+    65% {
+        opacity: 1;
+
+        transform:
+            translate(0,0)
+            rotate(
+                calc(var(--rotation, 0deg) - 1deg)
+            )
+            scale(1.03);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(0,0)
+            rotate(var(--rotation, 0deg))
+            scale(1);
+    }
+}
+
+
+/* ============================================================
+   CONTINUOUS PHOTO FLOAT
+   ============================================================ */
+
+@keyframes gentleFloat {
+
+    0% {
+        transform:
+            translate3d(0,0,0)
+            rotate(0deg);
+    }
+
+    25% {
+        transform:
+            translate3d(0,-6px,0)
+            rotate(.35deg);
+    }
+
+    50% {
+        transform:
+            translate3d(0,-10px,0)
+            rotate(-.45deg);
+    }
+
+    75% {
+        transform:
+            translate3d(0,-5px,0)
+            rotate(.3deg);
+    }
+
+    100% {
+        transform:
+            translate3d(0,0,0)
+            rotate(0deg);
+    }
+}
+
+
+/* ============================================================
+   BACKGROUND MOVEMENT
+   ============================================================ */
+
+@keyframes backgroundReveal {
+
+    from {
+        opacity: 0;
+
+        transform: scale(1.07);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+}
+
+
+@keyframes backgroundBreath {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.025);
+    }
+}
+
+
+/* ============================================================
+   SOFT LIGHT
+   ============================================================ */
+
+@keyframes softLight {
+
+    from {
+        opacity: .55;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* ============================================================
+   TITLE ENTRANCE
+   ============================================================ */
+
+@keyframes titleReveal {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(.72)
+            rotate(-3deg);
+    }
+
+    55% {
+        opacity: 1;
+
+        transform:
+            translateY(-5px)
+            scale(1.06)
+            rotate(-3deg);
+    }
+
+    75% {
+        transform:
+            translateY(2px)
+            scale(.98)
+            rotate(-3deg);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1)
+            rotate(-3deg);
+    }
+}
+
+
+/* ============================================================
+   TITLE FLOAT
+   ============================================================ */
+
+@keyframes titleFloat {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-5px)
+            rotate(.5deg);
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+}
+
+
+/* ============================================================
+   UNDERLINE
+   ============================================================ */
+
+@keyframes underlineDraw {
+
+    from {
+        transform:
+            translateX(-50%)
+            rotate(-2deg)
+            scaleX(0);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            rotate(-2deg)
+            scaleX(1);
+    }
+}
+
+
+/* ============================================================
+   SPARKLE
+   ============================================================ */
+
+@keyframes sparkleAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(.2)
+            rotate(-30deg);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            scale(1.2)
+            rotate(10deg);
+    }
+
+    100% {
+        opacity: .85;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+@keyframes sparkleFloat {
+
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-7px) rotate(10deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0);
+    }
+}
+
+
+/* ============================================================
+   HEART FLOAT
+   ============================================================ */
+
+@keyframes heartFloat {
+
+    0% {
+        transform:
+            translate(0,0)
+            rotate(-5deg);
+    }
+
+    25% {
+        transform:
+            translate(5px,-8px)
+            rotate(4deg);
+    }
+
+    50% {
+        transform:
+            translate(-3px,-15px)
+            rotate(-3deg);
+    }
+
+    75% {
+        transform:
+            translate(5px,-8px)
+            rotate(5deg);
+    }
+
+    100% {
+        transform:
+            translate(0,0)
+            rotate(-5deg);
+    }
+}
+
+
+/* ============================================================
+   BUTTERFLY FLOAT
+   ============================================================ */
+
+@keyframes butterflyFloat {
+
+    0% {
+        transform:
+            translate(0,0)
+            rotate(-8deg);
+    }
+
+    25% {
+        transform:
+            translate(8px,-10px)
+            rotate(5deg);
+    }
+
+    50% {
+        transform:
+            translate(-4px,-20px)
+            rotate(-5deg);
+    }
+
+    75% {
+        transform:
+            translate(-10px,-9px)
+            rotate(8deg);
+    }
+
+    100% {
+        transform:
+            translate(0,0)
+            rotate(-8deg);
+    }
+}
+
+
+/* ============================================================
+   STAR PULSE
+   ============================================================ */
+
+@keyframes starPulse {
+
+    0%,
+    100% {
+        opacity: .45;
+
+        transform:
+            scale(.8)
+            rotate(0);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            scale(1.25)
+            rotate(20deg);
+    }
+}
+
+
+/* ============================================================
+   DOT FLOAT
+   ============================================================ */
+
+@keyframes dotFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* ============================================================
+   DECORATION APPEAR
+   ============================================================ */
+
+@keyframes decorationAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.2)
+            rotate(-20deg);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+/* ============================================================
+   PHOTO GLOW
+   ============================================================ */
+
+@keyframes photoGlow {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: .5;
+    }
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (min-width: 601px) and (max-width: 1199px) {
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+    }
+
+    .scrapbook {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .photo7 {
+        left: 3%;
+        top: 7%;
+        width: 28%;
+    }
+
+    .photo5 {
+        left: 36%;
+        top: 5%;
+        width: 25%;
+    }
+
+    .photo1 {
+        left: 69%;
+        top: 5%;
+        width: 28%;
+    }
+
+    .photo6 {
+        left: 2.5%;
+        top: 40%;
+        width: 14%;
+    }
+
+    .photo2 {
+        left: 71%;
+        top: 41%;
+        width: 18%;
+    }
+
+    .photo3 {
+        left: 23%;
+        top: 69%;
+        width: 24%;
+    }
+
+    .photo4 {
+        left: 62%;
+        top: 70%;
+        width: 27%;
+    }
+
+    .title-block {
+        left: 30%;
+        top: 34%;
+        width: 40%;
+    }
+
+    .title-line--1 {
+        font-size: 5vw;
+    }
+
+    .title-line--2 {
+        font-size: 7.5vw;
+    }
+
+    .heart1 {
+        left: 27%;
+    }
+
+    .heart2 {
+        left: 67%;
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    html,
+    body {
+        width: 100%;
+        height: auto;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+
+    .scrapbook {
+        width: 100%;
+        height: auto;
+
+        min-height: 100vh;
+
+        overflow: hidden;
+    }
+
+
+    .background-image {
+        position: fixed;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+
+
+    .mobile-flow {
+        display: flex;
+
+        flex-direction: column;
+
+        height: auto;
+
+        padding-top: 15px;
+    }
+
+
+    /* --------------------------------------------------------
+       TITLE
+       -------------------------------------------------------- */
+
+    .title-block {
+        position: relative;
+
+        left: auto;
+        top: auto;
+
+        width: 100%;
+
+        order: -1;
+
+        padding:
+            25px 10px 15px;
+
+        margin: 0 auto 10px;
+
+        transform:
+            translateY(15px)
+            scale(.72)
+            rotate(-2deg);
+
+        animation-delay: 1s;
+    }
+
+
+    .title-inner {
+        animation:
+            titleFloat 5s ease-in-out 2.5s infinite;
+    }
+
+
+    .title-line--1 {
+        font-size: 42px;
+    }
+
+
+    .title-line--2 {
+        font-size: 68px;
+    }
+
+
+    /* --------------------------------------------------------
+       PHOTOS
+       -------------------------------------------------------- */
+
+    .photo {
+        position: relative;
+
+        left: auto !important;
+        top: auto !important;
+
+        width: 88% !important;
+
+        margin:
+            18px auto;
+
+        transform:
+            translateY(25px)
+            scale(.9);
+
+        animation:
+            mobilePhotoEnter
+            .8s
+            cubic-bezier(.18,.89,.32,1.28)
+            forwards;
+    }
+
+
+    .photo-float {
+        animation:
+            mobileFloat
+            5s
+            ease-in-out
+            infinite;
+    }
+
+
+    .photo7 {
+        animation-delay: 1.8s;
+    }
+
+    .photo5 {
+        animation-delay: 2s;
+    }
+
+    .photo1 {
+        animation-delay: 2.2s;
+    }
+
+    .photo6 {
+        animation-delay: 2.4s;
+    }
+
+    .photo2 {
+        animation-delay: 2.6s;
+    }
+
+    .photo3 {
+        animation-delay: 2.8s;
+    }
+
+    .photo4 {
+        animation-delay: 3s;
+    }
+
+
+
+/* Mobile */
+@media (max-width: 600px) {
+  .back-button {
+    top: 16px;
+    left: 16px;
+
+    padding: 8px 14px;
+    font-size: 15px;
+  }
+}
+
+    /* --------------------------------------------------------
+       DECORATIONS
+       -------------------------------------------------------- */
+
+    .decoration {
+        display: none;
+    }
+}
+
+
+/* ============================================================
+   MOBILE PHOTO ENTRANCE
+   ============================================================ */
+
+@keyframes mobilePhotoEnter {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(.88);
+    }
+
+    65% {
+        opacity: 1;
+
+        transform:
+            translateY(-5px)
+            scale(1.02);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* ============================================================
+   MOBILE FLOAT
+   ============================================================ */
+
+@keyframes mobileFloat {
+
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(.3deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0);
+    }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+</style>
+<link rel="stylesheet" href="slow-photos.css">
+</head>
+
+
+<body>
+
+<div class="scrapbook">
+
+    <!-- ======================================================
+         BACKGROUND
+         ====================================================== -->
+
+    <div class="background-image"></div>
+
+
+    <!-- ======================================================
+         CENTER TITLE
+         ====================================================== -->
+
+    <div class="title-block" aria-label="Happy Birthday Alena">
+
+        <div class="title-inner">
+
+            <p class="title-line title-line--1">
+                Happy Birthday
+            </p>
+
+            <p class="title-line title-line--2">
+                Alena!
+            </p>
+
+            <div class="birthday-underline"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ======================================================
+         FLOATING DECORATIONS
+         ====================================================== -->
+
+    <span class="decoration heart heart1">♡</span>
+    <span class="decoration heart heart2">♥</span>
+    <span class="decoration heart heart3">♡</span>
+    <span class="decoration heart heart4">♥</span>
+
+    <span class="decoration butterfly butterfly1">🦋</span>
+    <span class="decoration butterfly butterfly2">🦋</span>
+
+    <span class="decoration star star1">✦</span>
+    <span class="decoration star star2">✧</span>
+    <span class="decoration star star3">✦</span>
+    <span class="decoration star star4">✧</span>
+
+    <span class="decoration dot dot1"></span>
+    <span class="decoration dot dot2"></span>
+    <span class="decoration dot dot3"></span>
+    <span class="decoration dot dot4"></span>
+
+
+    <!-- ======================================================
+         PHOTOS
+         ====================================================== -->
+
+    <div class="mobile-flow">
+
+        <div class="photo photo7"
+             style="--rotation:-2deg; --start-x:-60px; --start-y:-30px;">
+            <div class="photo-float">
+                <img src="images/photo7.jpg" alt="Photo 7">
+            </div>
+        </div>
+
+
+        <div class="photo photo5"
+             style="--rotation:-1deg; --start-x:0px; --start-y:-55px;">
+            <div class="photo-float">
+                <img src="images/photo5.jpg" alt="Photo 5">
+            </div>
+        </div>
+
+
+        <div class="photo photo1"
+             style="--rotation:2deg; --start-x:60px; --start-y:-30px;">
+            <div class="photo-float">
+                <img src="images/photo1.jpg" alt="Photo 1">
+            </div>
+        </div>
+
+
+        <div class="photo photo6"
+             style="--rotation:-4deg; --start-x:-60px; --start-y:25px;">
+            <div class="photo-float">
+                <img src="images/photo6.jpg" alt="Photo 6">
+            </div>
+        </div>
+
+
+        <div class="photo photo2"
+             style="--rotation:2deg; --start-x:60px; --start-y:20px;">
+            <div class="photo-float">
+                <img src="images/photo2.jpg" alt="Photo 2">
+            </div>
+        </div>
+
+
+        <div class="photo photo3"
+             style="--rotation:3deg; --start-x:-40px; --start-y:50px;">
+            <div class="photo-float">
+                <img src="images/photo3.jpg" alt="Photo 3">
+            </div>
+        </div>
+
+
+        <div class="photo photo4"
+             style="--rotation:-2deg; --start-x:50px; --start-y:50px;">
+            <div class="photo-float">
+                <img src="images/photo4.jpg" alt="Photo 4">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script src="music.js"></script>
+<script src="scrapbook-magic.js"></script>
+</body>
+</html>

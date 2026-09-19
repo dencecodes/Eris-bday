@@ -1,0 +1,92 @@
+/* =====================================================================
+   SLOWER PHOTO REVEAL  —  slow-photos.css   (for Scrapbook.html)
+   ---------------------------------------------------------------------
+   Link this file AFTER the page's own <style> block, so it wins:
+
+       </style>
+       <link rel="stylesheet" href="slow-photos.css">
+       </head>
+
+   Change the three numbers below to taste:
+     --photo-time   how long each photo takes to fade / drift into place
+     --photo-gap    the pause between one photo and the next
+     --photo-start  the wait before the first photo appears
+   ===================================================================== */
+:root {
+  --photo-time: 2.4s;
+  --photo-gap: .8s;
+  --photo-start: .6s;
+}
+
+/* the order the photos arrive in: 7, 5, 1, 6, 2, 3, 4 */
+.photo7 { --i: 0; }
+.photo5 { --i: 1; }
+.photo1 { --i: 2; }
+.photo6 { --i: 3; }
+.photo2 { --i: 4; }
+.photo3 { --i: 5; }
+.photo4 { --i: 6; }
+
+.photo {
+  animation-duration: var(--photo-time);
+  animation-timing-function: cubic-bezier(.25, .6, .3, 1);   /* soft, unhurried landing */
+  animation-delay: calc(var(--photo-start) + var(--i, 0) * var(--photo-gap));
+}
+
+/* the gentle floating only begins once a photo has settled */
+.photo .photo-float {
+  animation-delay: calc(var(--photo-start) + var(--i, 0) * var(--photo-gap) + var(--photo-time));
+}
+
+/* phones: the title comes in first at the top, so the photos start a little later */
+@media (max-width: 600px) {
+  :root {
+    --photo-start: 2s;
+    --photo-gap: .8s;
+  }
+}
+
+
+/* =====================================================================
+   TITLE LAST  —  "Happy Birthday Alena!" appears once every photo has landed
+   ---------------------------------------------------------------------
+   The title and the little hearts, stars, butterflies and dots around it
+   are all pushed back so they start together, right after the last photo.
+   Change --title-pause for a longer or shorter beat before the title.
+   (Phones keep the title first, because it sits at the top above the photos.)
+   ===================================================================== */
+:root {
+  --title-pause: .3s;
+}
+
+@media (min-width: 601px) {
+  :root {
+    /* how much later than before everything around the title starts
+       (the original page had the title at 3s) */
+    --title-shift: calc(var(--photo-start) + 6 * var(--photo-gap) + var(--photo-time) + var(--title-pause) - 3s);
+  }
+
+  .title-block                { animation-delay: calc(3s + var(--title-shift)); }
+  .title-inner                { animation-delay: calc(4.5s + var(--title-shift)); }
+  .birthday-underline::after  { animation-delay: calc(3.65s + var(--title-shift)); }
+  .title-block::before,
+  .title-block::after         { animation-delay: calc(3.7s + var(--title-shift)), calc(4.6s + var(--title-shift)); }
+
+  .heart1     { animation-delay: calc(3.5s + var(--title-shift)), calc(4.2s + var(--title-shift)); }
+  .heart2     { animation-delay: calc(3.7s + var(--title-shift)), calc(4.5s + var(--title-shift)); }
+  .heart3     { animation-delay: calc(3.9s + var(--title-shift)), calc(4.7s + var(--title-shift)); }
+  .heart4     { animation-delay: calc(4.1s + var(--title-shift)), calc(4.9s + var(--title-shift)); }
+
+  .butterfly1 { animation-delay: calc(4s + var(--title-shift)),   calc(4.8s + var(--title-shift)); }
+  .butterfly2 { animation-delay: calc(4.3s + var(--title-shift)), calc(5.1s + var(--title-shift)); }
+
+  .star1      { animation-delay: calc(4s + var(--title-shift)),   calc(4.8s + var(--title-shift)); }
+  .star2      { animation-delay: calc(4.2s + var(--title-shift)), calc(5s + var(--title-shift)); }
+  .star3      { animation-delay: calc(4.4s + var(--title-shift)), calc(5.2s + var(--title-shift)); }
+  .star4      { animation-delay: calc(4.6s + var(--title-shift)), calc(5.4s + var(--title-shift)); }
+
+  .dot1       { animation-delay: calc(4s + var(--title-shift)),   calc(4.5s + var(--title-shift)); }
+  .dot2       { animation-delay: calc(4.2s + var(--title-shift)), calc(4.8s + var(--title-shift)); }
+  .dot3       { animation-delay: calc(4.4s + var(--title-shift)), calc(5.1s + var(--title-shift)); }
+  .dot4       { animation-delay: calc(4.6s + var(--title-shift)), calc(5.3s + var(--title-shift)); }
+}
