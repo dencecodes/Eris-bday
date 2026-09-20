@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Pacifico&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>A Magical Bouquet ✿</title>
 <style>
@@ -104,8 +103,7 @@ body {
   transform: translateX(-50%);
   width: 100%;
   height: 100%;
-  filter: blur(0.1vmin);
-  background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(255, 190, 140, 0.25)), repeating-linear-gradient(220deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(189deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), repeating-linear-gradient(148deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 19px, transparent 19px, transparent 22px), linear-gradient(90deg, rgb(255, 183, 94), rgb(255, 245, 230));
+  background-image: radial-gradient(ellipse at top, transparent 0%, var(--dark-color)), radial-gradient(ellipse at bottom, var(--dark-color), rgba(255, 190, 140, 0.25)), repeating-linear-gradient(220deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 18.5px, transparent 19.5px, transparent 21px, rgb(0, 0, 0) 22px), repeating-linear-gradient(189deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 18.5px, transparent 19.5px, transparent 21px, rgb(0, 0, 0) 22px), repeating-linear-gradient(148deg, rgb(0, 0, 0) 0px, rgb(0, 0, 0) 18.5px, transparent 19.5px, transparent 21px, rgb(0, 0, 0) 22px), linear-gradient(90deg, rgb(255, 183, 94), rgb(255, 245, 230));
 }
 
 .flowers {
@@ -563,12 +561,14 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  top: 0;
-  transform: translate(-50%, -100%);
-  width: 8vmin;
-  height: 8vmin;
+  top: -4vmin;
+  transform: translate(-50%, -50%);
+  width: 36vmin;
+  height: 36vmin;
   background-color: #ff8fb0;
-  filter: blur(10vmin);
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0) 68%);
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0) 68%);
+  pointer-events: none;
 }
 .flower__leaf {
   position: absolute;
@@ -620,7 +620,7 @@ body {
   width: 60%;
   height: 60%;
   border-radius: inherit;
-  background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(67.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(112.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(112.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(22.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(22.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(157.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(67.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(67.5deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), linear-gradient(90deg, rgb(255, 235, 18), rgb(255, 206, 0));
+  background-image: repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 12px), linear-gradient(90deg, rgb(255, 235, 18), rgb(255, 206, 0));
 }
 .flower__line {
   height: 55vmin;
@@ -674,15 +674,15 @@ body {
 .flower__light {
   position: absolute;
   bottom: 0vmin;
-  width: 1vmin;
-  height: 1vmin;
-  background-color: rgb(255, 214, 107);
+  width: 1.5vmin;
+  height: 1.5vmin;
+  margin: 0 0 -0.25vmin -0.25vmin;
+  background: radial-gradient(circle, rgb(255, 214, 107) 30%, rgba(255, 214, 107, 0) 70%);
   border-radius: 50%;
-  filter: blur(0.2vmin);
   animation: light-ans 4s linear infinite backwards;
 }
 .flower__light:nth-child(odd) {
-  background-color: #ff9fd6;
+  background: radial-gradient(circle, #ff9fd6 30%, rgba(255, 159, 214, 0) 70%);
 }
 .flower__light--1 {
   left: -2vmin;
@@ -1236,14 +1236,12 @@ body {
   left: 0vmin;
   bottom: -20vmin;
   z-index: 100;
-  filter: blur(0.3vmin);
   transform: scale(0.8) rotate(2deg);
 }
 .long-g--7 {
   left: 35vmin;
   bottom: 20vmin;
   z-index: -1;
-  filter: blur(0.3vmin);
   transform: scale(0.6) rotate(2deg);
   opacity: 0.7;
 }
@@ -1334,16 +1332,13 @@ body {
   50% {
     opacity: 1;
     transform: translateY(-15vmin) translateX(2vmin);
-    filter: blur(0.2vmin);
   }
   75% {
     transform: translateY(-20vmin) translateX(-2vmin);
-    filter: blur(0.2vmin);
   }
   100% {
     transform: translateY(-30vmin);
     opacity: 0;
-    filter: blur(1vmin);
   }
 }
 @keyframes moving-flower-1 {
@@ -1504,6 +1499,11 @@ body {
   animation-play-state: paused !important;
 }
 
+/* phones: half as many fireflies (still gold + pink) */
+@media (max-width: 700px) {
+  .flower__light--3, .flower__light--4, .flower__light--7, .flower__light--8 { display: none; }
+}
+
 /* ===== LOADING SCREEN ===== */
 .bloom-loader{
   position:fixed;inset:0;z-index:10000;
@@ -1582,24 +1582,40 @@ body {
   .hb{ --hb-size: clamp(2.8rem, 19vw, 8rem); }
 }
 
-.hb__float{ position:relative; animation:hb-float 7s ease-in-out infinite; }
+.hb__float{ position:relative; animation:hb-float 7s ease-in-out infinite; will-change:transform; }
 .hb__title{ font-size:1em; font-weight:400; }
 
 .hb__word{ position:relative; display:block; isolation:isolate; white-space:nowrap; }
 .hb__word--happy{ font-size:.58em; }
 .hb__word--bday{ font-size:1em; margin-top:-.16em; }
 
-/* soft bloom behind the letters */
+/* soft bloom behind the letters (a text-shadow, not an animated blur filter) */
 .hb__word::before{
   content:attr(data-text);
-  position:absolute; inset:0; z-index:-1; display:block;
+  position:absolute; inset:0; z-index:-2; display:block;
   padding:.08em .2em .18em; text-align:center; line-height:1;
-  -webkit-text-fill-color:currentColor;
-  filter:blur(.16em);
+  color:transparent; -webkit-text-fill-color:transparent;
+  text-shadow:0 0 .32em var(--glow), 0 0 .14em var(--glow);
   animation:hb-glow 4.2s ease-in-out infinite;
+  will-change:opacity;
 }
-.hb__word--happy::before{ color:rgba(255,208,130,.8); }
-.hb__word--bday::before{ color:rgba(255,150,182,.75); animation-delay:-1.6s; }
+.hb__word--happy{ --glow:rgba(255,208,130,.8); }
+.hb__word--bday{ --glow:rgba(255,150,182,.75); }
+.hb__word--bday::before{ animation-delay:-1.6s; }
+
+/* thick "extrusion" edge: an invisible copy of the text under the lettering that only casts its stacked shadows */
+.hb__word::after{
+  content:attr(data-text);
+  position:absolute; inset:0; z-index:-1; display:block;
+  padding:.1em .22em .3em; text-align:center; line-height:1;
+  color:transparent; -webkit-text-fill-color:transparent;
+}
+.hb__word--happy::after{
+  text-shadow:0 .014em 0 #d9a552, 0 .028em 0 #c98f3f, 0 .05em .04em rgba(50,15,10,.6), 0 0 .14em rgba(255,214,140,.6);
+}
+.hb__word--bday::after{
+  text-shadow:0 .014em 0 #e07f9f, 0 .028em 0 #b9456a, 0 .05em .04em rgba(50,15,10,.6), 0 0 .16em rgba(255,140,175,.55);
+}
 
 /* the lettering: gradient fill, thick "extrusion" edge, shine sweep */
 .hb__ink{
@@ -1615,19 +1631,11 @@ body {
   background-image:
     linear-gradient(105deg, transparent 42%, rgba(255,255,255,.9) 50%, transparent 58%),
     linear-gradient(180deg, #fffdf4 0%, #fff0d2 48%, #f5d08c 100%);
-  filter:
-    drop-shadow(0 .02em 0 #c9954a)
-    drop-shadow(0 .05em .05em rgba(60,20,10,.55))
-    drop-shadow(0 0 .12em rgba(255,214,140,.55));
 }
 .hb__word--bday .hb__ink{
   background-image:
     linear-gradient(105deg, transparent 42%, rgba(255,255,255,.85) 50%, transparent 58%),
     linear-gradient(180deg, #ffd3de 0%, #f8a9bf 50%, #ffc7a6 100%);
-  filter:
-    drop-shadow(0 .02em 0 #b9526d)
-    drop-shadow(0 .05em .05em rgba(60,20,10,.55))
-    drop-shadow(0 0 .12em rgba(255,150,182,.5));
 }
 
 /* hearts, stars, swashes */
@@ -1708,25 +1716,15 @@ body {
 }
 
 /* extra room so the tall script never gets clipped */
-.hb__ink{ padding:.1em .22em .3em; }
+.hb__ink{ padding:.1em .22em .3em; will-change:transform; }
 .hb__word::before{ padding:.1em .22em .3em; }
 .hb__word--happy{ font-size:.6em; }
 .hb__word--bday{ margin-top:-.3em; }
 
 /* stacked edges for a thicker 3D look */
 .hb__word--happy .hb__ink{
-  filter:
-    drop-shadow(0 .014em 0 #d9a552)
-    drop-shadow(0 .028em 0 #c98f3f)
-    drop-shadow(0 .05em .04em rgba(50,15,10,.6))
-    drop-shadow(0 0 .14em rgba(255,214,140,.6));
 }
 .hb__word--bday .hb__ink{
-  filter:
-    drop-shadow(0 .014em 0 #e07f9f)
-    drop-shadow(0 .028em 0 #b9456a)
-    drop-shadow(0 .05em .04em rgba(50,15,10,.6))
-    drop-shadow(0 0 .16em rgba(255,140,175,.55));
 }
 
 /* bigger hearts, stars and swashes, placed like your reference */
@@ -2092,10 +2090,6 @@ body {
       </div>
     </div>
 
-   
-
-
-
     <div class="grow-ans" style="--d:1.2s">
       <div class="flower__g-long">
         <div class="flower__g-long__top"></div>
@@ -2379,22 +2373,26 @@ body {
     var loader = document.getElementById('bloomLoader');
     var canvas = document.getElementById('fireworks');
     var ctx = canvas.getContext('2d');
-    var W = 0, H = 0;
+    var W = 0, H = 0, Q = 1;
 
     function resize() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = window.innerWidth; H = window.innerHeight;
-      canvas.width = W * dpr; canvas.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // 1 canvas pixel per CSS pixel is plenty for glowing sparks (retina would be 4x the work); cap the total too
+      Q = Math.min(1, Math.sqrt(1100000 / (W * H)));
+      canvas.width = Math.round(W * Q); canvas.height = Math.round(H * Q);
+      ctx.setTransform(Q, 0, 0, Q, 0, 0);
     }
     resize();
-    window.addEventListener('resize', resize);
+    var resizeTimer = 0;
+    window.addEventListener('resize', function () { clearTimeout(resizeTimer); resizeTimer = setTimeout(resize, 150); });
 
     function rand(a, b) { return Math.random() * (b - a) + a; }
 
     /* ---------- fireworks ---------- */
-    var rockets = [], sparks = [], running = false, nextLaunch = 0;
+    var rockets = [], sparks = [], running = false, nextLaunch = 0, last = 0, lastRaf = 0;
+    var q = 1, slow = 0;            // quality 1 -> 0.3: shrinks automatically if the device can't keep up
     var HUES = [340, 320, 42, 28, 290, 200, 55];
+    var MAX_SPARKS = 380;
 
     function launch() {
       rockets.push({
@@ -2407,62 +2405,81 @@ body {
     }
 
     function explode(r) {
-      var count = W < 600 ? 48 : 70;
+      var count = Math.max(10, Math.round((W < 600 ? 38 : 56) * q));
       var ring = Math.random() < 0.4;              // some bursts are perfect rings
       for (var i = 0; i < count; i++) {
         var ang = (Math.PI * 2 * i) / count + rand(-0.05, 0.05);
         var sp = ring ? rand(3.6, 4) : rand(1, 4.6);
+        var hue = r.hue + rand(-12, 12);
         sparks.push({
           x: r.x, y: r.y,
           vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp,
           life: 1, decay: rand(0.010, 0.019),
-          hue: r.hue + rand(-12, 12), size: rand(1.4, 2.6)
+          col: 'hsl(' + hue.toFixed(0) + ',100%,72%)', size: rand(1.4, 2.6)
         });
       }
     }
 
     function frame(t) {
       if (!running) return;
+      requestAnimationFrame(frame);
+
+      // adaptive quality: if the whole page keeps running below ~21 fps, do less; a fast phone never triggers this
+      var raw = t - lastRaf; lastRaf = t;
+      if (raw > 48 && raw < 1000) slow++; else if (raw < 36 && slow > 0) slow--;
+      if (slow > 24) {
+        slow = 0;
+        if (q > 0.31) q = Math.max(0.3, q * 0.7);
+        else { running = false; canvas.style.display = 'none'; return; }   // still struggling at the lowest setting: switch off
+      }
+
+      var dt = t - last;
+      if (dt < 30) return;                          // ~30 fps is plenty for fireworks and half the work
+      last = t;
+      var k = Math.min(dt, 70) / 16.667;            // same speed whatever the frame rate
+      var fric = Math.pow(0.975, k), drag = Math.pow(0.985, k), fade = 1 - Math.pow(0.78, k);
 
       // fade old trails while keeping the canvas transparent
       ctx.globalCompositeOperation = 'destination-out';
-      ctx.fillStyle = 'rgba(0,0,0,0.22)';
+      ctx.fillStyle = 'rgba(0,0,0,' + fade.toFixed(3) + ')';
       ctx.fillRect(0, 0, W, H);
       ctx.globalCompositeOperation = 'lighter';
 
-      if (t > nextLaunch) {
+      if (t > nextLaunch && sparks.length < MAX_SPARKS * q) {
         launch();
         if (Math.random() < 0.35) launch();
-        nextLaunch = t + rand(650, 1500);
+        nextLaunch = t + rand(650, 1500) / q;
       }
 
+      ctx.lineWidth = 2;
       for (var i = rockets.length - 1; i >= 0; i--) {
         var r = rockets[i];
         r.px = r.x; r.py = r.y;
-        r.y += r.vy;
-        r.vy *= 0.985;
-        ctx.strokeStyle = 'hsla(' + r.hue + ',100%,80%,.9)';
-        ctx.lineWidth = 2;
+        r.y += r.vy * k;
+        r.vy *= drag;
+        ctx.globalAlpha = 0.9;
+        ctx.strokeStyle = 'hsl(' + r.hue + ',100%,80%)';
         ctx.beginPath(); ctx.moveTo(r.px, r.py); ctx.lineTo(r.x, r.y); ctx.stroke();
         if (r.y <= r.targetY || r.vy > -1.2) { explode(r); rockets.splice(i, 1); }
       }
 
       for (var j = sparks.length - 1; j >= 0; j--) {
         var s = sparks[j];
-        s.x += s.vx; s.y += s.vy;
-        s.vx *= 0.975; s.vy = s.vy * 0.975 + 0.045;   // friction + gravity
-        s.life -= s.decay;
+        s.x += s.vx * k; s.y += s.vy * k;
+        s.vx *= fric; s.vy = s.vy * fric + 0.045 * k;   // friction + gravity
+        s.life -= s.decay * k;
         if (s.life <= 0) { sparks.splice(j, 1); continue; }
-        ctx.fillStyle = 'hsla(' + s.hue + ',100%,' + (60 + s.life * 20) + '%,' + s.life + ')';
+        ctx.globalAlpha = s.life;
+        ctx.fillStyle = s.col;
         ctx.beginPath(); ctx.arc(s.x, s.y, s.size * (0.5 + s.life * 0.6), 0, Math.PI * 2); ctx.fill();
       }
-
-      requestAnimationFrame(frame);
+      ctx.globalAlpha = 1;
     }
 
     function startFireworks() {
       if (reduced || running) return;
       running = true;
+      last = 0; lastRaf = 0;
       nextLaunch = 0;
       requestAnimationFrame(frame);
     }
@@ -2494,7 +2511,7 @@ body {
     var box = document.getElementById('hbDust');
     if (!box || reduced) return;
     function rand(a, b) { return Math.random() * (b - a) + a; }
-    var n = window.innerWidth < 600 ? 12 : 20;
+    var n = window.innerWidth < 600 ? 8 : 12;
     for (var i = 0; i < n; i++) {
       var s = document.createElement('i');
       s.style.left = rand(0, 100).toFixed(1) + '%';
